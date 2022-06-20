@@ -3,13 +3,23 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- '*'
-
-pool:
-  vmImage: 'windows-latest'
-
-steps:
-- task: gitmirror@0
-  inputs:
-    GitRepoUrl: 'https://ivanaimufua41@dev.azure.com/ivanaimufua41/test-typescript-endpoint/_git/test-typescript-endpoint'
+name: Keep clone up to date
+variables:
+  REMOTE_ADDR: 'https://github.com/ivanaimufua41/demo-typescript-api.git'
+stages:
+  - stage: running_git_commands
+    displayName: running_git_commands
+    jobs:
+      - job: initiate
+        displayName: initiate
+        continueOnError: false
+        steps:
+        - checkout: self
+          clean: true
+          persistCredentials: true
+          displayName: run_commands
+        - bash: | 
+            git checkout main
+            git remote add $(REMOTE_ADDR)
+            git pull
+            git log 
