@@ -13,4 +13,3 @@ steps:
 - task: gitmirror@0
   inputs:
     GitRepoUrl: 'https://ivanaimufua41@dev.azure.com/ivanaimufua41/test-typescript-endpoint/_git/test-typescript-endpoint'
-  displayName: 'Connect to git repo'
